@@ -1,13 +1,13 @@
 # pip install openpyxl
 # Configurar mail: https://www.letscodemore.com/blog/smtplib-smtpauthenticationerror-username-and-password-not-accepted/
+# Enviar correos electrónicos Youtube: https://www.youtube.com/watch?v=mRXR8eO9igQ
 import smtplib, ssl
 import getpass
 # Leer excel
 import openpyxl as op
 
-
 # leer el archivo
-book = op.load_workbook('plantilla.xlsx', data_only=True)
+book = op.load_workbook('source/plantilla.xlsx', data_only=True)
 # fijar la hoja
 hoja = book.active
 
@@ -33,12 +33,17 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465,context=context) as server:
     for empleado in lista_empleados:
         SUBJECT = f"Constancia de pago de {empleado[0]}"
         destinatario = empleado[3]
-        mensaje = f'Hola {empleado[0]}, este mes ganaste {empleado[2]}'
+        html = f"""
+        Constancia de pago
+        Hola {empleado[0]}, este mes ganaste {empleado[2]}        
+        """
         BODY = '\r\n'.join(['To: %s' % destinatario,
         'From: %s' % username,
         'Subject: %s' % SUBJECT,
-        '', mensaje])
+        '', html])
         server.sendmail(username,[destinatario],BODY)
         print("Mensaje Enviado ...")
 
 
+print("El programa se cerrá, presione cualquier tecla")
+input("***")
