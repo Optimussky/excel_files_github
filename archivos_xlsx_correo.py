@@ -45,5 +45,5 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465,context=context) as server:
         print("Mensaje Enviado ...")
 
 
-print("El programa se cerrá, presione cualquier tecla")
+print("El programa se cerrará, presione cualquier tecla")
 input("***")
