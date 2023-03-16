@@ -19,5 +19,8 @@ for row in range(1, dataframe.max_row):
 
     data.append(_row)
 
+
+headers = ['Id', 'Nombre','Puesto', 'Salario','Correo']
+headers_align = (("center",) * 5)
 #print(data)
-print(tabulate(data))
+print(tabulate(data, headers=headers, colalign=headers_align))
